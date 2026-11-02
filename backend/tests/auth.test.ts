@@ -23,7 +23,7 @@ describe("POST /api/v1/auth/register", () => {
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject({
       success: true,
-      message: "User registered successfully",
+      message: "Akun berhasil dibuat",
       data: { user: { email, name: "Register User" } },
     });
     expect(response.body.data.user).not.toHaveProperty("password");
@@ -52,6 +52,7 @@ describe("POST /api/v1/auth/register", () => {
       .send({ email, password: PASSWORD });
 
     expectApiError(response, 409, "EMAIL_ALREADY_EXISTS");
+    expect(response.body.message).toBe("Email ini sudah terdaftar");
   });
 
   it.each([
@@ -81,6 +82,7 @@ describe("POST /api/v1/auth/register", () => {
       .send('{"email":');
 
     expectApiError(response, 400, "INVALID_JSON");
+    expect(response.body.message).toBe("Format data yang dikirim tidak valid");
   });
 });
 
@@ -95,7 +97,7 @@ describe("POST /api/v1/auth/login", () => {
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
       success: true,
-      message: "Login successful",
+      message: "Berhasil masuk",
       data: { user: { id: user.id, email: user.email } },
     });
     expect(typeof response.body.data.token).toBe("string");
@@ -111,6 +113,7 @@ describe("POST /api/v1/auth/login", () => {
       .send({ email: user.email, password: "wrong-password" });
 
     expectApiError(response, 401, "INVALID_CREDENTIALS");
+    expect(response.body.message).toBe("Email atau kata sandi salah");
   });
 
   it("returns the same 401 for an unknown email", async () => {
@@ -119,5 +122,6 @@ describe("POST /api/v1/auth/login", () => {
       .send({ email: "nobody@example.com", password: PASSWORD });
 
     expectApiError(response, 401, "INVALID_CREDENTIALS");
+    expect(response.body.message).toBe("Email atau kata sandi salah");
   });
 });

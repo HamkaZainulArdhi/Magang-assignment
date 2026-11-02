@@ -42,7 +42,7 @@ describe("POST /api/v1/items", () => {
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject({
       success: true,
-      message: "Item created successfully",
+      message: "Barang berhasil ditambahkan",
       data: {
         name: "Mechanical Keyboard",
         description: "Tenkeyless, brown switches",
@@ -72,6 +72,7 @@ describe("POST /api/v1/items", () => {
       .send({ name: "Valid", stock: 1, price: 1, userId: 999 });
 
     expectApiError(response, 400, "VALIDATION_ERROR");
+    expect(response.body.message).toBe("Field tidak dikenal: userId");
   });
 
   it("rejects a payload without price", async () => {
@@ -81,6 +82,7 @@ describe("POST /api/v1/items", () => {
       .send({ name: "No price", stock: 1 });
 
     expectApiError(response, 400, "VALIDATION_ERROR");
+    expect(response.body.message).toBe("Harga harus berupa angka");
   });
 
   it("requires authentication", async () => {
@@ -135,7 +137,7 @@ describe("authentication middleware", () => {
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
       success: false,
-      message: "Route not found",
+      message: "Endpoint tidak ditemukan",
       error: { code: "ROUTE_NOT_FOUND" },
     });
   });
@@ -358,6 +360,7 @@ describe("POST /api/v1/items/:id/reduce-stock", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.data.stock).toBe(6);
+    expect(response.body.message).toBe("Stok barang berhasil dikurangi");
   });
 
   it("returns 409 without changing stock when stock is insufficient", async () => {
@@ -369,7 +372,7 @@ describe("POST /api/v1/items/:id/reduce-stock", () => {
       .send({ quantity: 11 });
 
     expectApiError(failed, 409, "INSUFFICIENT_STOCK");
-    expect(failed.body.message).toBe("Insufficient stock");
+    expect(failed.body.message).toBe("Stok barang tidak mencukupi");
 
     const afterFailure = await request(app)
       .get(`/api/v1/items/${itemId}`)

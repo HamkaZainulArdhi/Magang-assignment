@@ -17,7 +17,7 @@ export async function create(req: Request, res: Response) {
     bodyOf<CreateItemInput>(req),
   );
 
-  return sendSuccess(res, "Item created successfully", item, 201);
+  return sendSuccess(res, "Barang berhasil ditambahkan", item, 201);
 }
 
 export async function list(req: Request, res: Response) {
@@ -26,14 +26,14 @@ export async function list(req: Request, res: Response) {
     queryOf<ListItemsQuery>(req),
   );
 
-  return sendSuccess(res, "Items retrieved successfully", items, 200, meta);
+  return sendSuccess(res, "Daftar barang berhasil diambil", items, 200, meta);
 }
 
 export async function getById(req: Request, res: Response) {
   const { id: itemId } = paramsOf<ItemIdParams>(req);
   const item = await itemService.getItem(requireAuth(req).id, itemId);
 
-  return sendSuccess(res, "Item retrieved successfully", item);
+  return sendSuccess(res, "Detail barang berhasil diambil", item);
 }
 
 export async function update(req: Request, res: Response) {
@@ -44,14 +44,14 @@ export async function update(req: Request, res: Response) {
     bodyOf<UpdateItemInput>(req),
   );
 
-  return sendSuccess(res, "Item updated successfully", item);
+  return sendSuccess(res, "Barang berhasil diperbarui", item);
 }
 
 export async function remove(req: Request, res: Response) {
   const { id: itemId } = paramsOf<ItemIdParams>(req);
   await itemService.deleteItem(requireAuth(req).id, itemId);
 
-  return sendSuccess(res, "Item deleted successfully", { id: itemId });
+  return sendSuccess(res, "Barang berhasil dihapus", { id: itemId });
 }
 
 export async function reduceStock(req: Request, res: Response) {
@@ -63,5 +63,5 @@ export async function reduceStock(req: Request, res: Response) {
     quantity,
   );
 
-  return sendSuccess(res, "Stock reduced successfully", item);
+  return sendSuccess(res, "Stok barang berhasil dikurangi", item);
 }

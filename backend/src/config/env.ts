@@ -1,11 +1,8 @@
-import { z } from "zod";
+import { z } from "../lib/zod.js";
 
-// Node >= 20.12 can load .env natively; variables already present win.
-try {
-  process.loadEnvFile();
-} catch {
-  // .env is optional when configuration comes from the process environment.
-}
+
+process.loadEnvFile();
+
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),

@@ -175,7 +175,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [false] },
-        message: { type: "string", example: "Insufficient stock" },
+        message: { type: "string", example: "Stok barang tidak mencukupi" },
         error: {
           type: "object",
           properties: {
@@ -190,7 +190,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [true] },
-        message: { type: "string", example: "User registered successfully" },
+        message: { type: "string", example: "Akun berhasil dibuat" },
         data: {
           type: "object",
           properties: { user: { $ref: "#/components/schemas/User" } },
@@ -203,7 +203,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [true] },
-        message: { type: "string", example: "Login successful" },
+        message: { type: "string", example: "Berhasil masuk" },
         data: {
           type: "object",
           properties: {
@@ -223,7 +223,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [true] },
-        message: { type: "string", example: "Item created successfully" },
+        message: { type: "string", example: "Barang berhasil ditambahkan" },
         data: { $ref: "#/components/schemas/Item" },
       },
       required: ["success", "message", "data"],
@@ -232,7 +232,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [true] },
-        message: { type: "string", example: "Items retrieved successfully" },
+        message: { type: "string", example: "Daftar barang berhasil diambil" },
         data: {
           type: "array",
           items: { $ref: "#/components/schemas/Item" },
@@ -245,7 +245,7 @@ export const components = {
       type: "object",
       properties: {
         success: { type: "boolean", enum: [true] },
-        message: { type: "string", example: "Item deleted successfully" },
+        message: { type: "string", example: "Barang berhasil dihapus" },
         data: {
           type: "object",
           properties: { id: { type: "integer", example: 10 } },
@@ -259,22 +259,22 @@ export const components = {
     ValidationError: errorResponse(
       "Invalid request input.",
       "VALIDATION_ERROR",
-      "stock: Number must be greater than or equal to 0",
+      "Nama barang tidak boleh kosong",
     ),
     Unauthorized: errorResponse(
       "Missing, invalid, or expired token.",
       "UNAUTHORIZED",
-      "Authentication required",
+      "Silakan masuk terlebih dahulu",
     ),
     NotFound: errorResponse(
       "Resource not found.",
       "ITEM_NOT_FOUND",
-      "Item not found",
+      "Barang tidak ditemukan",
     ),
     Conflict: errorResponse(
       "Request conflicts with current state.",
       "INSUFFICIENT_STOCK",
-      "Insufficient stock",
+      "Stok barang tidak mencukupi",
     ),
   },
 };

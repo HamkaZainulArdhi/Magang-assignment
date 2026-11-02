@@ -339,7 +339,7 @@ Success:
 ```json
 {
   "success": true,
-  "message": "Items retrieved successfully",
+  "message": "Daftar barang berhasil diambil",
   "data": [],
   "meta": {
     "page": 1,
@@ -355,7 +355,7 @@ Error:
 ```json
 {
   "success": false,
-  "message": "Insufficient stock",
+  "message": "Stok barang tidak mencukupi",
   "error": {
     "code": "INSUFFICIENT_STOCK"
   }
@@ -364,6 +364,10 @@ Error:
 
 `meta` is only present on paginated responses. `totalPages` is `0` when the
 result set is empty.
+
+All `message` values are user-facing Indonesian. `error.code` values remain
+stable English identifiers so clients can handle errors without depending on
+message text.
 
 **Money representation:** `price` is returned as a decimal string with two
 fraction digits (for example `"150000.50"`) because MySQL stores it as
