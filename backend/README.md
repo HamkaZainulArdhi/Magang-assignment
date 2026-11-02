@@ -4,7 +4,7 @@
 
 | Aktivitas | Porsi AI | Porsi Manusia |
 | --- | ---: | ---: |
-| Menulis kode | 40% | 60% |
+| Menulis kode | 60% | 40% |
 | Desain sistem & arsitektur | 25% | 75% |
 | Testing & debugging | 20% | 80% |
 | Refactor & review kode | 15% | 85% |
