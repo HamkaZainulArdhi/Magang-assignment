@@ -4,8 +4,8 @@
 
 | Aktivitas | Porsi AI | Porsi Manusia |
 | --- | ---: | ---: |
-| Menulis kode | 20% | 80% |
-| Desain UI & komponen | 10% | 90% |
+| Menulis kode | 45% | 55% |
+| Desain UI & komponen | 20% | 80% |
 | Integrasi data & state management | 15% | 85% |
 | Testing & debugging | 10% | 90% |
 | Dokumentasi | 20% | 80% |
