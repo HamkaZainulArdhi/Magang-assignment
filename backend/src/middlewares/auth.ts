@@ -20,7 +20,7 @@ export function authenticate(): RequestHandler {
       req.auth = verifyAccessToken(token);
       next();
     } catch {
-      next(unauthorized("Invalid or expired token"));
+      next(unauthorized("Sesi Anda sudah berakhir. Silakan masuk kembali"));
     }
   };
 }

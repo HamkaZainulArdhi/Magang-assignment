@@ -24,7 +24,7 @@ export const paths = {
         409: errorResponse(
           "Email is already registered.",
           "EMAIL_ALREADY_EXISTS",
-          "Email is already registered",
+          "Email ini sudah terdaftar",
         ),
       },
     },
@@ -40,7 +40,7 @@ export const paths = {
         401: errorResponse(
           "Invalid email or password.",
           "INVALID_CREDENTIALS",
-          "Invalid email or password",
+          "Email atau kata sandi salah",
         ),
       },
     },

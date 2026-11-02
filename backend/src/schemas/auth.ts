@@ -1,28 +1,31 @@
-import { z } from "zod";
+import { z } from "../lib/zod.js";
 
 const email = z
-  .string()
+  .string({ error: "Email wajib diisi" })
   .trim()
   .toLowerCase()
-  .max(191)
-  .email("Invalid email address");
+  .max(191, "Email maksimal 191 karakter")
+  .email("Format email tidak valid");
 
-// bcrypt only reads the first 72 bytes, so reject longer UTF-8 values instead
-// of silently truncating them.
 const password = z
-  .string()
-  .min(8, "Password must be at least 8 characters")
-  .max(72, "Password must be at most 72 characters")
+  .string({ error: "Kata sandi wajib diisi" })
+  .min(8, "Kata sandi minimal 8 karakter")
+  .max(72, "Kata sandi maksimal 72 karakter")
   .refine(
     (value) => Buffer.byteLength(value, "utf8") <= 72,
-    "Password must be at most 72 bytes",
+    "Kata sandi maksimal 72 byte",
   );
 
 export const registerSchema = z
   .object({
     email,
     password,
-    name: z.string().trim().min(1).max(100).optional(),
+    name: z
+      .string({ error: "Nama harus berupa teks" })
+      .trim()
+      .min(1, "Nama tidak boleh kosong")
+      .max(100, "Nama maksimal 100 karakter")
+      .optional(),
   })
   .strict();
 
